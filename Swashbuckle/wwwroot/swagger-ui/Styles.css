@@ -1,0 +1,15 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap');
+
+* {
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+.topbar-wrapper img[alt="Swagger UI"], .topbar-wrapper span {
+    display: none;
+}
+
+.topbar-wrapper .link:after {
+    content: url(../img/makingsense60x60.png);
+    width: 41px;
+    display: flex;
+}
