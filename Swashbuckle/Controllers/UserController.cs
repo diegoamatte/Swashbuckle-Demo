@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Swashbuckle.Models;
+
 
 namespace Swashbuckle.Controllers
 {
@@ -8,31 +10,45 @@ namespace Swashbuckle.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+
+        [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetUsers([FromQuery, BindRequired] string filter, [FromQuery] PageParams pagingParams)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(new List<User>());
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult GetUser(int id)
         {
-            return "value";
+            return Ok(new Models.User());
         }
 
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult CreateUser([FromBody] User user)
         {
+            return Ok();
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult UpdateUser(int id, [FromBody] User user)
         {
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DeleteUser(int id)
         {
+            return NoContent();
         }
+
+        [Obsolete("Deprecated")]
+        [HttpPost("photo")]
+        public IActionResult UploadPhoto(IFormFile file)
+        {
+            return Ok("photoUrl");
+        }
+
     }
 }
